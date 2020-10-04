@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
+import Footer from './Footer';
 import { unmountComponentAtNode } from 'react-dom';
 
 let container: any = null;
@@ -16,8 +16,8 @@ afterEach(() => {
   container = null;
 })
 
-test('App should have a Landing', () => {
-  const { getByTestId } = render(<App />);
-  const landing = getByTestId('landing');
-  expect(landing).toBeInTheDocument();
+test('Footer should render', () => {
+  const { getByTestId } = render(<Footer />);
+	const footer = getByTestId('footer');
+	expect(footer).toBeInTheDocument();
 })

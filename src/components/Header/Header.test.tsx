@@ -1,9 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
+import Header from './Header';
 import { unmountComponentAtNode } from 'react-dom';
 
 let container: any = null;
+const testProps = {
+	brandName: 'Test brand name',
+};
 
 beforeEach(() => {
   container = document.createElement('div');
@@ -16,8 +19,9 @@ afterEach(() => {
   container = null;
 })
 
-test('App should have a Landing', () => {
-  const { getByTestId } = render(<App />);
-  const landing = getByTestId('landing');
-  expect(landing).toBeInTheDocument();
+test('Subtitle should display the expected text', () => {
+  const { getByTestId } = render(<Header {...testProps} />);
+	const header = getByTestId('header');
+	expect(header).toBeInTheDocument();
+	expect(header.textContent).toBe(testProps.brandName);
 })
