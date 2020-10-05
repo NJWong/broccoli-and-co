@@ -1,8 +1,8 @@
 /** @jsx jsx */
+import { useState } from 'react';
 import { jsx, css } from '@emotion/core';
 
-import Title from './Title';
-import Subtitle from './Subtitle';
+import RequestModal from './RequestModal';
 import Button from '../Button/Button';
 import breakpoints from '../../utils/breakpoints';
 
@@ -12,17 +12,30 @@ type HeroBannerProps = {
 	buttonText: string,
 }
 
-const HeroBanner = (props: HeroBannerProps) => {
+const HeroBanner: React.FC<HeroBannerProps> = (props) => {
+	const [showRequestModal, setShowRequestModal] = useState(false);
+
+  const openRequestModal = () => {
+    setShowRequestModal(true);
+  }
+
+  const closeRequestModal = () => {
+    setShowRequestModal(false);
+	}
+	
 	return (
-		<main css={layout} data-testid="hero-banner">
-			<Title text={props.title} />
-			<Subtitle text={props.subtitle} />
-			<Button text={props.buttonText} />
+		<main css={container} data-testid="hero-banner">
+			<h1 css={title} data-testid="title">{props.title}</h1>
+			<p css={subtitle} data-testid="subtitle">{props.subtitle}</p>
+			<div css={buttonContainer}>
+				<Button text={props.buttonText} action={openRequestModal} />
+			</div>
+			<RequestModal showModal={showRequestModal} closeModal={closeRequestModal} />
 		</main>
 	);
 };
 
-const layout = css`
+const container = css`
 	margin-bottom: auto;
 	text-align: center;
 	padding: 32px;
@@ -30,6 +43,34 @@ const layout = css`
 	${breakpoints.md} {
 		padding: 48px;
 	}
+`;
+
+const title = css`
+	font-weight: 500;
+	color: #111111;
+	display: inline-block;
+	font-size: 2.25rem;
+
+	${breakpoints.md} {
+		font-size: 3rem;
+	}
+`;
+
+const subtitle = css`
+	font-weight: 300;
+	color: #1A202C;
+	margin-top: 0;
+	margin-bottom: 32px;
+	font-size: 1.25rem;
+
+	${breakpoints.md} {
+		font-size: 1.5rem;
+	}
+`;
+
+const buttonContainer = css`
+	display: inline-block;
+	max-width: 350px;
 `;
 
 export default HeroBanner;

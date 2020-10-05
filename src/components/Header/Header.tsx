@@ -20,7 +20,7 @@ type HeaderProps = {
 	brandName: string,
 }
 
-const Header = (props: HeaderProps) => {
+const Header: React.FC<HeaderProps> = (props) => {
 	return (
 		<header css={headerStyle} data-testid="header">
 			<nav>
