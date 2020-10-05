@@ -2,11 +2,17 @@
 
 ## Quick Start Guide
 
-### `yarn start`
+Install the dependencies:
+```
+yarn install
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Run the app locally
+```
+yarn start
+```
 
+## Other Commands
 
 ### `yarn test`
 
@@ -56,3 +62,9 @@ By default, Create React App projects use [Jest](https://jestjs.io/) and the [Re
 
 ### Valid email format
 The regex for the email field validation follows the pattern used by the [W3C](https://www.w3resource.com/javascript/form/email-validation.php).
+
+## Other Notes
+
+* The app is keyboard accessible, even inside the modal popups
+* The app was tested in the lastest versions of Chrome, Firefox, and Safari
+* The app is responsive
