@@ -12,6 +12,7 @@ const testProps = {
 
 beforeEach(() => {
   container = document.createElement('div');
+  container.id = 'root';
   document.body.appendChild(container);
 })
 
@@ -40,4 +41,26 @@ test('HeroBanner should render the expected CTA button', () => {
   const button = getByTestId('button');
 	expect(button).toBeInTheDocument();
 	expect(button.textContent).toBe(testProps.buttonText);
+})
+
+test('Request modal should show when CTA button is clicked', () => {
+  const { getByTestId, getByText, getAllByTestId } = render(<HeroBanner {...testProps} />);
+  const button = getByTestId('button');
+  button.click();
+
+  // Check modal header exists
+  const modalHeader = getByTestId('modal-header');
+  expect(modalHeader).toBeInTheDocument();
+  
+  // Check modal form exists
+  const modalForm = getByTestId('modal-form');
+  expect(modalForm).toBeInTheDocument();
+
+  // Check three text fields exist
+  const fields = getAllByTestId('text-field');
+  expect(fields.length).toBe(3);
+
+  // Check the submit button exists
+  const submit = getByText('Send!');
+  expect(submit).toBeInTheDocument();
 })

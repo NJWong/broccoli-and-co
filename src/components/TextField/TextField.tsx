@@ -4,27 +4,28 @@ import { jsx, css, SerializedStyles } from '@emotion/core';
 type TextFieldProps = {
 	label: string,
 	name: string,
-	register: any,
-	errors: any,
+	register?: any,
+	errors?: any,
 }
 
 const TextField = (props: TextFieldProps) => {
 	const styles: SerializedStyles[] = [base];
 
-	if (props.errors[props.name]) {
+	if (props.errors && props.errors[props.name]) {
 		styles.push(error);
 	}
 
 	return (
-		<div css={styles}>
-			<label htmlFor={props.name}>{props.label}</label>
+		<div data-testid="text-field" css={styles}>
+			<label data-testid="label" htmlFor={props.name}>{props.label}</label>
 			<input
+				data-testid="input"
 				name={props.name}
 				id={props.name}
 				type="text"
 				ref={props.register}
 			/>
-			{ props.errors[props.name] && <p>{ props.errors[props.name].message }</p>}
+			{ props.errors && props.errors[props.name] && <p>{ props.errors[props.name].message }</p>}
 		</div>
 	);
 }

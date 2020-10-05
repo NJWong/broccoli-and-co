@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import { jsx, css } from '@emotion/core';
 
-import RequestModal from './RequestModal';
 import Button from '../Button/Button';
+import RequestModal from './RequestModal';
+import SuccessModal from './SuccessModal';
 import breakpoints from '../../utils/breakpoints';
 
 type HeroBannerProps = {
@@ -14,6 +15,7 @@ type HeroBannerProps = {
 
 const HeroBanner: React.FC<HeroBannerProps> = (props) => {
 	const [showRequestModal, setShowRequestModal] = useState(false);
+	const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const openRequestModal = () => {
     setShowRequestModal(true);
@@ -21,6 +23,14 @@ const HeroBanner: React.FC<HeroBannerProps> = (props) => {
 
   const closeRequestModal = () => {
     setShowRequestModal(false);
+	}
+
+	const openSuccessModal = () => {
+    setShowSuccessModal(true);
+  }
+
+  const closeSuccessModal = () => {
+    setShowSuccessModal(false);
 	}
 	
 	return (
@@ -30,7 +40,8 @@ const HeroBanner: React.FC<HeroBannerProps> = (props) => {
 			<div css={buttonContainer}>
 				<Button text={props.buttonText} action={openRequestModal} />
 			</div>
-			<RequestModal showModal={showRequestModal} closeModal={closeRequestModal} />
+			<RequestModal showModal={showRequestModal} closeModal={closeRequestModal} openSuccessModal={openSuccessModal} />
+			<SuccessModal showModal={showSuccessModal} closeModal={closeSuccessModal} />
 		</main>
 	);
 };
