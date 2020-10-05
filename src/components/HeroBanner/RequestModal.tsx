@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import ReactModal from 'react-modal';
-import axios from 'axios';
 
 import Button from '../Button/Button';
 import TextField from '../TextField/TextField';
 import breakpoints from '../../utils/breakpoints';
+import requestInvite from '../../services/InviteService';
 
 const Modal = styled(ReactModal)`
 	font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
@@ -62,18 +62,12 @@ const RequestModal: React.FC<RequstModalProps> = (props) => {
 		setServerError(false);
 		setRequestPending(true);
 
-		const url = 'https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth';
-		const payload = {
-			name: data.name,
-			email: data.email,
-		};
-
 		try {
-			await axios.post(url, payload);
+			await requestInvite(data.name, data.email);
 			handleClose();
 			props.openSuccessModal();
 		} catch (error) {
-			setErrorMessage(error.response.data.errorMessage);
+			setErrorMessage(error.message);
 			setServerError(true);
 		}
 

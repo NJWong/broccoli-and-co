@@ -11,6 +11,7 @@ type TextFieldProps = {
 const TextField = (props: TextFieldProps) => {
 	const styles: SerializedStyles[] = [base];
 
+	// Check for validation errors
 	if (props.errors && props.errors[props.name]) {
 		styles.push(error);
 	}
